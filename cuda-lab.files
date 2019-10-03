@@ -1,0 +1,12 @@
+./cuda-lab.files
+./README.md
+./cuda-lab.creator.user
+./cuda-lab.config
+./CMakeLists.txt
+./common/helper_cuda.h
+./common/exceptions.h
+./cuda-lab.includes
+./cuda-lab.creator
+./matrixMul/matrixMul.cu
+./matrixMul/CMakeLists.txt
+./upd-creator-files.sh
