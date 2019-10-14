@@ -3,17 +3,32 @@ cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 project(cuda-lab LANGUAGES C CXX CUDA)
 
 ###############################################################################
+# Build setup
+###############################################################################
+set(CMAKE_BUILD_TYPE Release)
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+
+###############################################################################
 # C/C++ flags
 ###############################################################################
-set(CMAKE_C_FLAGS "-O3")
-set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
-set(CMAKE_BUILD_TYPE Release)
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0 -ggdb3")
+    set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
+elseif(CMAKE_BUILD_TYPE MATCHES Release)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O3")
+    set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
+else()
+    message(FATAL_ERROR "Unsupported build type: ${CMAKE_BUILD_TYPE}")
+endif()
 
 ###############################################################################
 # CUDA
 ###############################################################################
 set(CUDA_ARCH sm_70 CACHE STRING "Set GPU architecture")
-set(CMAKE_CUDA_FLAGS "--ftz=false -arch=${CUDA_ARCH} --use_fast_math -Xptxas=-v")
+set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -arch=${CUDA_ARCH}")
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} -G -Xptxas=-v")
+endif()
 
 ###############################################################################
 # Boost
