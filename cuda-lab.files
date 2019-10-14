@@ -2,6 +2,8 @@
 ./README.md
 ./cuda-lab.creator.user
 ./cuda-lab.config
+./convolution2D/convolution2D.cu
+./convolution2D/CMakeLists.txt
 ./CMakeLists.txt
 ./common/helper_cuda.h
 ./common/exceptions.h

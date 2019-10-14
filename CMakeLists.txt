@@ -35,3 +35,4 @@ include_directories(${CMAKE_SOURCE_DIR})
 
 # Source subdirs
 add_subdirectory(matrixMul)
+add_subdirectory(convolution2D)
